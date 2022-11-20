@@ -25,6 +25,13 @@ class Player(GameSprite):
             self.rect.y -= self.speed
         if kp[K_DOWN] and self.rect.y<500:
             self.rect.y += self.speed
+class Player2(GameSprite):
+    def update(self):
+        kp = key.get_pressed()
+        if kp[K_W] and self.rect.y>0:
+            self.rect.y -= self.speed
+        if kp[K_S] and self.rect.y<500:
+            self.rect.y += self.speed
 while r:
     for e in event.get():
         if e.type == QUIT:
