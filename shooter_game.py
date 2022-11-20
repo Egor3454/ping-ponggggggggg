@@ -1,5 +1,4 @@
 from pygame import *
-from random import *
 from time import time as timer
 b = (200,255,255)
 win_width = 600
