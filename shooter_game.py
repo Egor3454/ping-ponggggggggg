@@ -8,6 +8,16 @@ w.fill(b)
 display.set_caption('ping-pong')
 c = time.Clock()
 r = True
+class GameSprite(sprite.Sprite):
+    def __init__(self, p_image, p_x, p_y, size_x, size_y, p_speed):
+        super().__init__()
+        self.image = transform.scale(image.load(p_image),(size_x,size_y))
+        self.speed = p_speed
+        self.rect = self.image.get_rect()
+        self.rect.x = p_x
+        self.rect.y = p_y
+    def reset(self):
+        w.blit(self.image,(self.rect.x,self.rect.y))
 while r:
     for e in event.get():
         if e.type == QUIT:
