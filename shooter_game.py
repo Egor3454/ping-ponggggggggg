@@ -1,5 +1,6 @@
 from pygame import *
 from time import time as timer
+from random import *
 b = (200,255,255)
 win_width = 600
 win_height = 500
@@ -32,16 +33,32 @@ class Player2(GameSprite):
             self.rect.y -= self.speed
         if kp[K_s] and self.rect.y<400:
             self.rect.y += self.speed
-p1 = Player('racketka.jpg',515,400,80, 100, 10)
-p2 = Player2('racketka.jpg',5,400,80, 100, 10)
+p1 = Player('racketka.jpg',30,200,80, 100, 10)
+p2 = Player2('racketka.jpg',520,200,80, 100, 10)
+ba = GameSprite('Myach.jpg',250, 200, 50, 50, 4)
+s_x = 3
+s_y = 3
+font.init()
+font1 = font.SysFont('Arial',36)
+font2 = font.SysFont('Arial',80)
+finish = False
 while r:
     for e in event.get():
         if e.type == QUIT:
             r = False
-    w.fill(b)      
+    w.fill(b) 
+    ba.rect.x += s_x
+    ba.rect.y += s_y
     p1.update()
     p1.reset()
     p2.update()
     p2.reset()
+    ba.update()
+    ba.reset()
+    if sprite.collide_rect(p1, ba) or sprite.collide_rect(p2, ba):
+        s_x *= -1
+        s_y *= 1
+    if ba.rect.y > win_height - 50 or ba.rect.y < 0:
+        s_y *= -1
     display.update()
     c.tick(60)
