@@ -33,15 +33,17 @@ class Player2(GameSprite):
             self.rect.y -= self.speed
         if kp[K_s] and self.rect.y<400:
             self.rect.y += self.speed
-p1 = Player('racketka.jpg',30,200,80, 100, 10)
-p2 = Player2('racketka.jpg',520,200,80, 100, 10)
+p1 = Player('racketka.jpg',10,200,80, 100, 10)
+p2 = Player2('racketka.jpg',510,200,80, 100, 10)
 ba = GameSprite('Myach.jpg',250, 200, 50, 50, 4)
 s_x = 3
 s_y = 3
 font.init()
-font1 = font.SysFont('Arial',36)
-font2 = font.SysFont('Arial',80)
+font = font.SysFont('Arial',80)
 finish = False
+g_o = False
+lose1 = font.render('Проиграл 1', True, (0,170,220))
+lose2 = font.render('Проиграл 2', True, (0,170,220))
 while r:
     for e in event.get():
         if e.type == QUIT:
@@ -60,5 +62,13 @@ while r:
         s_y *= 1
     if ba.rect.y > win_height - 50 or ba.rect.y < 0:
         s_y *= -1
+    if ba.rect.x < 0:
+        finish = True
+        w.blit(lose1, (90, 200))
+        g_o = True
+    if ba.rect.x > win_width:
+        finish = True
+        w.blit(lose2, (90, 200))
+        g_o = True
     display.update()
     c.tick(60)
